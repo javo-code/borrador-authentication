@@ -9,14 +9,14 @@ import passport from "passport";
 import UserController from "../controllers/users.controller.js";
 const controller = new UserController();
 
-const strategyOptions = {
+const githubStrategyOptions = {
     clientID: "Iv1.5060d94014fb270e",
     clientSecret: "3aa39e156b3891f0a646833a11c312f4ce28ab34",
-    callbackURL: "http://localhost:8080/users/profile"
+    callbackURL: "http://localhost:8080/users/github-profile"
 };
 
 const registerOrlogin = async (accessToken, refreshToken, profile, done) => {
-    console.log(profile);
+    return console.log(profile);
 }
 
-passport.use('github',  new GithubStrategy(strategyOptions, registerOrlogin))
+passport.use('github', new GithubStrategy(githubStrategyOptions, registerOrlogin))

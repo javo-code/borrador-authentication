@@ -1,5 +1,5 @@
 import { UserModel } from './models/user.model.js';
-import { createHash, isValidPassword } from '../../utils.js';
+import { createHash, isValidPass } from '../../utils.js';
 
 export default class UserDao {
   async createUser(user) {
@@ -32,7 +32,7 @@ export default class UserDao {
       const userExist = await UserModel.findOne({email}); 
       console.log("clg desde el loginUser del users.dao", userExist);
       if(userExist){
-        const passValid = isValidPassword(userExist, password )
+        const passValid = isValidPass(userExist, password )
         if(!passValid) return false
         else return userExist
       } return false

@@ -50,10 +50,10 @@ async login(req, res, next) {
     try {
         const { email } = req.body;
       const user = await userService.login(req.body);
-      console.log("clg desde el LOGIN del user.cotroller", user);
       if(user) {
-            req.session.email = email;
-            res.redirect('/profile');
+        console.log("clg desde el LOGIN del user.cotroller", req.session);
+        req.session.email = email;
+        res.redirect('/profile');
         } else res.redirect('/error-login')
     } catch (error) {
         console.log(error);
