@@ -32,8 +32,24 @@ async loginResponse(req, res, next) {
     }
   }
   
-  
- 
+  async githubResponse(req, res, next) {
+    try {
+      const user = await UserDao.getById(req.session.passport.user);
+      console.log(req.user);
+      const { first_name, email } = req.user;
+      res.json({
+        msg: "Register / Login with GITHUB ok!",
+        user: {
+          first_name,
+          email,
+          isGithub
+        }
+      })
+      } catch (error) {
+      next(error);  
+    }
+  }
+
   async register(req, res, next) {
     console.log("clg desde el REGISTER del user.cotroller", req.body);
     try {
@@ -56,8 +72,9 @@ async login(req, res, next) {
         res.redirect('/profile');
         } else res.redirect('/error-login')
     } catch (error) {
-        console.log(error);
+      next(error);  
     }
-}
+  }
+
 
 }

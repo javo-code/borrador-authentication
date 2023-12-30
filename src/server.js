@@ -21,8 +21,8 @@ import sessionFileStore from "session-file-store";
 //-------------------------📌MONGOSTORE IMPORTS
 
 import passport from "passport";
-import "./passport/strategy-github.js";
-import "./passport/local-strategy.js";
+import "./passport/github.strategy.js";
+import "./passport/local.strategy.js";
 
 
 const app = express();

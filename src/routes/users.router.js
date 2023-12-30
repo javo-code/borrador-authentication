@@ -45,6 +45,8 @@ router.get('/github-profile', async (req, res) => {
   }
 });
 
+
+
 router.get('/admin-profile', async (req, res) => {
   try {
     const response = await prodDao.getAll();
@@ -68,18 +70,25 @@ router.get("/register-github",
   passport.authenticate("github", { scope: ["user:email"] })
 );
 
+router.get("/github", async (req, res) => {
+    try {
+      passport.authenticate("github", { scope: ["user:email"] }), controller.githubResponse
+    } catch (error) {
+        console.error('Error al usar la ruta github la sesión:', error);
+      
+    }
+  }  
+);
+
 router.get('/logout', (req, res) => {
     try {
         req.session.destroy((err) => {
             if (err) {
-                console.error("Error closing session:", err);
-                throw new Error("The session couldn't be destroyed la sesión");
+              console.error("Error closing session:", err);
+              throw new Error("The session couldn't be destroyed la sesión");
             }
-            // Mensaje de confirmación de sesión destruida
-            console.log('Sesión de usuario destruida con éxito.');
-
-            // Redireccionar a la página de inicio de sesión después de cerrar sesión exitosamente
-            res.redirect('/login');
+              console.log('Sesión de usuario destruida con éxito.');
+              res.redirect('/login');
         });
     } catch (error) {
         console.error('Error al destruir la sesión:', error);
